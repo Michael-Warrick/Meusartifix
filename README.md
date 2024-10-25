@@ -1,2 +1,2 @@
 # Meusartifix
-Meusartifix: Objective-C Edition, a study of procedurally generated voxel worlds.
+Meusartifix: C++ Edition, a study of procedurally generated voxel worlds.
