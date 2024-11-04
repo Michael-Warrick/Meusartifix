@@ -1,26 +1,25 @@
 #include "Window.hpp"
 
-Core::Window::Window() 
-{
-    if (!glfwInit())
-    {
+Core::Window::Window() {
+    if (!glfwInit()) {
         std::cerr << "Failed to init GLFW!" << std::endl;
         return;
     }
 
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    
+
     m_Window = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(), nullptr, nullptr);
-    if (!m_Window)
-    {
+    if (!m_Window) {
         std::cerr << "Failed to create GLFW window!" << std::endl;
         glfwTerminate();
-        
+
         return;
     }
-    
+
     glfwSetWindowUserPointer(m_Window, this);
     glfwSetFramebufferSizeCallback(m_Window, framebufferResizeCallback);
+
+    m_Renderer.emplace(m_Window);
 }
 
 Core::Window::~Window()
@@ -36,7 +35,7 @@ Core::Window::~Window()
 
 void Core::Window::Present() 
 {
-    // Present window with render context... etc.
+    m_Renderer->DrawFrame();
 }
 
 void Core::Window::PollEvents() 

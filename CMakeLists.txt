@@ -9,25 +9,39 @@ add_subdirectory(Vendor/glfw)
 add_subdirectory(Vendor/glm)
 
 add_executable(${PROJECT_NAME}
-    # Core
-    ${CMAKE_SOURCE_DIR}/Engine/Core/Application.cpp
-    ${CMAKE_SOURCE_DIR}/Engine/Core/Window.cpp
+        # Core
+        ${CMAKE_SOURCE_DIR}/Engine/Core/Application.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Core/Window.cpp
 
-    # Game Main
-    ${CMAKE_SOURCE_DIR}/Game/main.cpp
+        # Graphics
+        ${CMAKE_SOURCE_DIR}/Engine/Graphics/stb_image/stb_image_impl.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Graphics/Renderer.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Graphics/Instance.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Graphics/Surface.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Graphics/Device.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Graphics/Queue.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Graphics/SwapChain.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Graphics/ImageView.cpp
+
+        # Input
+
+        # Physics
+
+        # Game
+        ${CMAKE_SOURCE_DIR}/Game/main.cpp
 )
 
 target_include_directories(${PROJECT_NAME}
-  PUBLIC
-  $<INSTALL_INTERFACE:Engine>
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Engine>
-  glfw
-  glm
-  Vulkan::Vulkan
+        PUBLIC
+        $<INSTALL_INTERFACE:Engine>
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Engine>
+        glfw
+        glm
+        Vulkan::Vulkan
 )
 
 target_link_libraries(${PROJECT_NAME}
-  glfw
-  glm
-  Vulkan::Vulkan
+        glfw
+        glm
+        Vulkan::Vulkan
 )

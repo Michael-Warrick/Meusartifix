@@ -21,9 +21,7 @@ void Core::Application::Run()
 
         // Update Game State (Physics, Game Logic, AI...)
 
-        // Render
-
-        // Present
+        // Render Scene and Present 
         m_Window.Present();
     }
     
