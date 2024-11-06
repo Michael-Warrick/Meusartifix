@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.30.5)
+cmake_minimum_required(VERSION 3.28.1)
 project(Meusartifix VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 20)

@@ -9,5 +9,5 @@ Graphics::Renderer::Renderer(GLFWwindow *window) : m_Window(window), m_Surface(m
 }
 
 void Graphics::Renderer::DrawFrame() {
-
+    m_SwapChain.Recreate();
 }

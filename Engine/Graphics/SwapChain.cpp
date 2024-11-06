@@ -1,9 +1,10 @@
 #include "SwapChain.hpp"
 
 Graphics::SwapChain::SwapChain(GLFWwindow *window, const vk::SurfaceKHR &surface,
-                               const vk::PhysicalDevice &physicalDevice, const vk::Device &logicalDevice) :
-        m_Window(window), m_Surface(surface), m_PhysicalDevice(physicalDevice),
-        m_LogicalDevice(logicalDevice) {
+                               const vk::PhysicalDevice &physicalDevice,
+                               const vk::Device &logicalDevice) : m_Window(window), m_Surface(surface),
+                                                                  m_PhysicalDevice(physicalDevice),
+                                                                  m_LogicalDevice(logicalDevice) {
     createSwapChain();
 }
 
@@ -12,7 +13,7 @@ Graphics::SwapChain::~SwapChain() {
 }
 
 void Graphics::SwapChain::Recreate() {
-
+    recreateSwapChain();
 }
 
 void Graphics::SwapChain::createSwapChain() {
@@ -89,7 +90,7 @@ Graphics::SwapChain::QuerySwapChainSupport(vk::PhysicalDevice physicalDevice, vk
         result = physicalDevice.getSurfaceFormatsKHR(surface, &formatCount, details.surfaceFormats.data());
         if (result != vk::Result::eSuccess) {
             throw std::runtime_error(
-                    "Failed to get swap chain surface formats with data! Error Code: " + vk::to_string(result));
+                "Failed to get swap chain surface formats with data! Error Code: " + vk::to_string(result));
         }
     }
 
@@ -105,7 +106,7 @@ Graphics::SwapChain::QuerySwapChainSupport(vk::PhysicalDevice physicalDevice, vk
         result = physicalDevice.getSurfacePresentModesKHR(surface, &presentModeCount, details.presentModes.data());
         if (result != vk::Result::eSuccess) {
             throw std::runtime_error(
-                    "Failed to get swap chain present modes with data! Error Code: " + vk::to_string(result));
+                "Failed to get swap chain present modes with data! Error Code: " + vk::to_string(result));
         }
     }
 
@@ -135,7 +136,7 @@ Graphics::SwapChain::choosePresentMode(const std::vector<vk::PresentModeKHR> &av
     return vk::PresentModeKHR::eFifo;
 }
 
-vk::Extent2D Graphics::SwapChain::chooseExtent(const vk::SurfaceCapabilitiesKHR &capabilities) {
+vk::Extent2D Graphics::SwapChain::chooseExtent(const vk::SurfaceCapabilitiesKHR &capabilities) const {
     if (capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max()) {
         return capabilities.currentExtent;
     } else {
@@ -148,16 +149,47 @@ vk::Extent2D Graphics::SwapChain::chooseExtent(const vk::SurfaceCapabilitiesKHR 
                 .setHeight(static_cast<uint32_t>(height));
 
         actualExtent.setWidth(
-                std::clamp(actualExtent.width, capabilities.minImageExtent.width, capabilities.maxImageExtent.width));
+            std::clamp(actualExtent.width, capabilities.minImageExtent.width, capabilities.maxImageExtent.width));
         actualExtent.setHeight(
-                std::clamp(actualExtent.height, capabilities.minImageExtent.height,
-                           capabilities.maxImageExtent.height));
+            std::clamp(actualExtent.height, capabilities.minImageExtent.height,
+                       capabilities.maxImageExtent.height));
 
         return actualExtent;
     }
 }
 
+void Graphics::SwapChain::createImageViews() {
+    m_SwapChainImageViews.reserve(m_SwapChainImages.size());
+
+    for (const auto &swapChainImage : m_SwapChainImages) {
+        m_SwapChainImageViews.emplace_back(m_LogicalDevice, swapChainImage, m_SwapChainImageFormat, vk::ImageAspectFlagBits::eColor, 1);
+    }
+}
+
+void Graphics::SwapChain::recreateSwapChain() {
+    int width = 0;
+    int height = 0;
+    glfwGetFramebufferSize(m_Window, &width, &height);
+
+    while (width == 0 || height == 0) {
+        glfwGetFramebufferSize(m_Window, &width, &height);
+        glfwWaitEvents();
+    }
+
+    m_LogicalDevice.waitIdle();
+
+    cleanupSwapChain();
+
+    createSwapChain();
+    createImageViews();
+}
+
 void Graphics::SwapChain::cleanupSwapChain() {
-    m_LogicalDevice.destroyImageView();
+    for (auto &imageView : m_SwapChainImageViews) {
+        imageView.CleanUp();
+    }
+
+    m_SwapChainImageViews.clear();  // Clears out any lingering references
+    m_LogicalDevice.destroySwapchainKHR(m_SwapChain);
 }
 

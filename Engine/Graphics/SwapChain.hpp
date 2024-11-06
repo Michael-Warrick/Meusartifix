@@ -9,6 +9,7 @@
 #include <GLFW/glfw3.h>
 
 #include "Queue.hpp"
+#include "ImageView.hpp"
 
 namespace Graphics {
     class SwapChain {
@@ -30,19 +31,23 @@ namespace Graphics {
         void createSwapChain();
         static vk::SurfaceFormatKHR chooseSurfaceFormat(const std::vector<vk::SurfaceFormatKHR> &availableFormats);
         static vk::PresentModeKHR choosePresentMode(const std::vector<vk::PresentModeKHR> &availablePresentModes);
-        vk::Extent2D chooseExtent(const vk::SurfaceCapabilitiesKHR &capabilities);
+        [[nodiscard]] vk::Extent2D chooseExtent(const vk::SurfaceCapabilitiesKHR &capabilities) const;
+        void createImageViews();
 
+        void recreateSwapChain();
 
         void cleanupSwapChain();
 
         GLFWwindow *m_Window;
+
         vk::SurfaceKHR m_Surface;
-        vk::Device m_LogicalDevice;
         vk::PhysicalDevice m_PhysicalDevice;
+        vk::Device m_LogicalDevice;
+
         vk::SwapchainKHR m_SwapChain;
         std::vector<vk::Image> m_SwapChainImages;
         vk::Format m_SwapChainImageFormat;
         vk::Extent2D m_SwapChainExtent;
-        std::vector<vk::ImageView> m_SwapChainImageViews;
+        std::vector<Graphics::ImageView> m_SwapChainImageViews;
     };
 } // namespace Graphics

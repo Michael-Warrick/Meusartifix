@@ -6,12 +6,17 @@
 namespace Graphics {
     class ImageView {
     public:
-        ImageView();
+        ImageView(const vk::Device &logicalDevice, const vk::Image &image, vk::Format format, vk::ImageAspectFlags aspectFlags, uint32_t mipLevels);
         ~ImageView();
 
-    private:
-        void createImageViews();
+        [[nodiscard]] vk::ImageView GetImageView() const ;
 
-        std::vector<vk::ImageView> imageViews;
+        void CleanUp();
+
+    private:
+        void createImageView(vk::Image image, vk::Format format, vk::ImageAspectFlags aspectFlags, uint32_t mipLevels);
+
+        vk::Device m_LogicalDevice;
+        vk::ImageView m_ImageView;
     };
 } // namespace Graphics
