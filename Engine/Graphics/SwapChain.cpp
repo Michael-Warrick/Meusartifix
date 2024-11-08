@@ -113,6 +113,10 @@ Graphics::SwapChain::QuerySwapChainSupport(vk::PhysicalDevice physicalDevice, vk
     return details;
 }
 
+vk::Format Graphics::SwapChain::GetImageFormat() const {
+    return m_SwapChainImageFormat;
+}
+
 vk::SurfaceFormatKHR
 Graphics::SwapChain::chooseSurfaceFormat(const std::vector<vk::SurfaceFormatKHR> &availableFormats) {
     for (const auto &availableFormat: availableFormats) {

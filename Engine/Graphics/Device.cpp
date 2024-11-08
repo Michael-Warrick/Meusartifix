@@ -10,13 +10,18 @@ Graphics::Device::~Device() {
     m_LogicalDevice.destroy();
 }
 
-vk::PhysicalDevice Graphics::Device::GetPhysicalVulkanDevice() {
+vk::PhysicalDevice Graphics::Device::GetPhysicalVulkanDevice() const {
     return m_PhysicalDevice;
 }
 
-vk::Device Graphics::Device::GetLogicalVulkanDevice() {
+vk::Device Graphics::Device::GetLogicalVulkanDevice() const {
     return m_LogicalDevice;
 }
+
+vk::SampleCountFlagBits Graphics::Device::GetMSAASamples() const {
+    return m_MSAASamples;
+}
+
 
 void Graphics::Device::pickPhysicalDevice() {
     uint32_t gpuCount = 0;
@@ -38,7 +43,7 @@ void Graphics::Device::pickPhysicalDevice() {
     for (const auto &gpu: gpus) {
         if (isPhysicalDeviceSuitable(gpu)) {
             m_PhysicalDevice = gpu;
-            msaaSamples = getMaxUsableSamples();
+            m_MSAASamples = getMaxUsableSamples();
 
             break;
         }

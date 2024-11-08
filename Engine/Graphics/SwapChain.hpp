@@ -25,6 +25,8 @@ namespace Graphics {
         ~SwapChain();
 
         static SwapChainSupportDetails QuerySwapChainSupport(vk::PhysicalDevice physicalDevice, vk::SurfaceKHR surface);
+
+        vk::Format GetImageFormat() const;
         void Recreate();
 
     private:

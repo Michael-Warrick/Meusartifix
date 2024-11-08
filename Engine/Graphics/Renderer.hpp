@@ -8,6 +8,7 @@
 #include "Surface.hpp"
 #include "Device.hpp"
 #include "SwapChain.hpp"
+#include "Pipeline.hpp"
 
 namespace Graphics
 {
@@ -25,5 +26,6 @@ namespace Graphics
         Surface m_Surface;
         Device m_Device;
         SwapChain m_SwapChain;
+        Pipeline m_Pipeline;
     };
 } // namespace Graphics

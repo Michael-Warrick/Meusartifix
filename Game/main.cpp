@@ -2,9 +2,9 @@
 
 int main() 
 {
-    Core::Application application;
     try
     {
+        Core::Application application;
         application.Run();
     }
     catch(const std::exception& e)
