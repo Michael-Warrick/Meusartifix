@@ -8,7 +8,8 @@ Graphics::Renderer::Renderer(GLFWwindow *window) : m_Window(window), m_Surface(m
                                                                m_Device.GetLogicalVulkanDevice()),
                                                    m_Pipeline(m_Device.GetPhysicalVulkanDevice(),
                                                               m_Device.GetLogicalVulkanDevice(),
-                                                              m_SwapChain.GetImageFormat(), m_Device.GetMSAASamples()) {
+                                                              m_SwapChain.GetImageFormat(), m_Device.GetMSAASamples()),
+                                                   m_GraphicsPipeline(m_Device.GetLogicalVulkanDevice(), m_Device.GetMSAASamples(), m_Pipeline.GetRenderPass()){
 }
 
 void Graphics::Renderer::DrawFrame() {

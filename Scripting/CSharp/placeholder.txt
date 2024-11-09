@@ -1,0 +1,2 @@
+This file will be removed once the CSharp scripting implementation begins. This file's purpose is simply to preserve the
+project's structure.

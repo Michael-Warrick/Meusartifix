@@ -6,10 +6,15 @@ Graphics::Pipeline::Pipeline(const vk::PhysicalDevice &physicalDevice, const vk:
                                                                            m_LogicalDevice(logicalDevice),
                                                                            m_SwapChainImageFormat(format),
                                                                            m_MSAASamples(msaaSamples) {
+    createRenderPass();
 }
 
 Graphics::Pipeline::~Pipeline() {
     m_LogicalDevice.destroyRenderPass(m_RenderPass);
+}
+
+vk::RenderPass Graphics::Pipeline::GetRenderPass() const {
+    return m_RenderPass;
 }
 
 void Graphics::Pipeline::createRenderPass() {

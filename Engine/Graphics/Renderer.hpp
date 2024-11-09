@@ -9,6 +9,7 @@
 #include "Device.hpp"
 #include "SwapChain.hpp"
 #include "Pipeline.hpp"
+#include "GraphicsPipeline.hpp"
 
 namespace Graphics {
     class Renderer {
@@ -25,5 +26,6 @@ namespace Graphics {
         Device m_Device;
         SwapChain m_SwapChain;
         Pipeline m_Pipeline;
+        GraphicsPipeline m_GraphicsPipeline;
     };
 } // namespace Graphics

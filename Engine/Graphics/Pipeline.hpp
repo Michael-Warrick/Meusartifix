@@ -12,6 +12,8 @@ namespace Graphics {
 
         ~Pipeline();
 
+        [[nodiscard]] vk::RenderPass GetRenderPass() const;
+
     private:
         void createRenderPass();
 

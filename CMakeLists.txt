@@ -24,6 +24,7 @@ add_executable(${PROJECT_NAME}
         ${CMAKE_SOURCE_DIR}/Engine/Graphics/ImageView.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Graphics/Pipeline.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Graphics/GraphicsPipeline.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Graphics/Framebuffer.cpp
 
         # Input
 
@@ -35,6 +36,9 @@ add_executable(${PROJECT_NAME}
         # Game
         ${CMAKE_SOURCE_DIR}/Game/main.cpp
 )
+
+add_subdirectory(Assets/Shaders)
+add_dependencies(${PROJECT_NAME} Shaders)
 
 target_include_directories(${PROJECT_NAME}
         PUBLIC

@@ -10,7 +10,7 @@
 namespace Graphics {
     class GraphicsPipeline {
     public:
-        GraphicsPipeline(const vk::Device &logicalDevice, const vk::SampleCountFlagBits &msaaSamples);
+        GraphicsPipeline(const vk::Device &logicalDevice, const vk::SampleCountFlagBits &msaaSamples, const vk::RenderPass &renderPass);
         ~GraphicsPipeline();
 
     private:
@@ -19,5 +19,8 @@ namespace Graphics {
 
         vk::Device m_LogicalDevice;
         vk::SampleCountFlagBits m_MSAASamples;
+        vk::PipelineLayout m_PipelineLayout;
+        vk::Pipeline m_GraphicsPipeline;
+        vk::RenderPass m_RenderPass;
     };
 } // namespace Graphics
