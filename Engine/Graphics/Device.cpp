@@ -60,7 +60,8 @@ bool Graphics::Device::isPhysicalDeviceSuitable(vk::PhysicalDevice physicalDevic
 
     bool swapChainIsAdequate = false;
     if (extensionsAreSupported) {
-        SwapChain::SwapChainSupportDetails swapChainSupport = SwapChain::QuerySwapChainSupport(physicalDevice, m_Surface);
+        SwapChain::SwapChainSupportDetails swapChainSupport = SwapChain::QuerySwapChainSupport(physicalDevice,
+                                                                                               m_Surface);
         swapChainIsAdequate = !swapChainSupport.surfaceFormats.empty() && !swapChainSupport.presentModes.empty();
     }
 
@@ -112,10 +113,10 @@ void Graphics::Device::createLogicalDevice() {
     Queue::QueueFamilyIndices indices = Queue::FindQueueFamilies(m_PhysicalDevice, m_Surface);
 
     std::vector<vk::DeviceQueueCreateInfo> queueCreateInfos;
-    std::set<uint32_t> uniqueQueueFamilies = {indices.graphicsFamily.value(), indices.presentFamily.value()};
+    std::set < uint32_t > uniqueQueueFamilies = {indices.graphicsFamily.value(), indices.presentFamily.value()};
 
     float queuePriority = 1.0f;
-    for (uint32_t queueFamily : uniqueQueueFamilies) {
+    for (uint32_t queueFamily: uniqueQueueFamilies) {
         vk::DeviceQueueCreateInfo queueCreateInfo = vk::DeviceQueueCreateInfo()
                 .setQueueFamilyIndex(queueFamily)
                 .setQueueCount(1)

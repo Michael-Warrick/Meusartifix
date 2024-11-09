@@ -24,12 +24,7 @@ void Graphics::Instance::createVulkanInstance() {
 
     vk::ApplicationInfo applicationInfo = vk::ApplicationInfo()
             .setPApplicationName("Meusartifix")
-            .setApplicationVersion(vk::makeApiVersion(
-                    0,
-                    1,
-                    0,
-                    0)
-            )
+            .setApplicationVersion(vk::makeApiVersion(0,1,0,0))
             .setPEngineName("COMRADE")
             .setEngineVersion(vk::makeApiVersion(0, 1, 0, 0))
             .setApiVersion(vk::ApiVersion13);
@@ -41,7 +36,8 @@ void Graphics::Instance::createVulkanInstance() {
 
     auto requiredExtensions = getRequiredExtensions();
     vk::InstanceCreateInfo createInfo = vk::InstanceCreateInfo()
-            .setFlags(m_IsRunningOnMacOS ? vk::InstanceCreateFlags(vk::InstanceCreateFlagBits::eEnumeratePortabilityKHR) : vk::InstanceCreateFlags())
+            .setFlags(m_IsRunningOnMacOS ? vk::InstanceCreateFlags(vk::InstanceCreateFlagBits::eEnumeratePortabilityKHR)
+                                         : vk::InstanceCreateFlags())
             .setPApplicationInfo(&applicationInfo)
             .setEnabledExtensionCount(static_cast<uint32_t>(requiredExtensions.size()))
             .setPpEnabledExtensionNames(requiredExtensions.data())
@@ -73,9 +69,9 @@ bool Graphics::Instance::checkValidationLayerSupport() {
         throw std::runtime_error("Failed to enumerate instance available layers. Error code: " + vk::to_string(result));
     }
 
-    for (const char *layerName : m_ValidationLayers) {
+    for (const char *layerName: m_ValidationLayers) {
         bool layerWasFound = false;
-        for (const auto &layerProperties : availableLayers) {
+        for (const auto &layerProperties: availableLayers) {
             if (strcmp(layerName, layerProperties.layerName) == 0) {
                 layerWasFound = true;
                 break;
@@ -149,8 +145,10 @@ VkResult Graphics::Instance::createDebugUtilsMessengerEXT(VkInstance instance,
     }
 }
 
-void Graphics::Instance::destroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger, const VkAllocationCallbacks* allocator) {
-    auto func = (PFN_vkDestroyDebugUtilsMessengerEXT) vkGetInstanceProcAddr(instance, "vkDestroyDebugUtilsMessengerEXT");
+void Graphics::Instance::destroyDebugUtilsMessengerEXT(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger,
+                                                       const VkAllocationCallbacks *allocator) {
+    auto func = (PFN_vkDestroyDebugUtilsMessengerEXT) vkGetInstanceProcAddr(instance,
+                                                                            "vkDestroyDebugUtilsMessengerEXT");
     if (func != nullptr) {
         func(instance, debugMessenger, allocator);
     }

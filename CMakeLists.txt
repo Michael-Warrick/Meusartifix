@@ -23,8 +23,12 @@ add_executable(${PROJECT_NAME}
         ${CMAKE_SOURCE_DIR}/Engine/Graphics/SwapChain.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Graphics/ImageView.cpp
         ${CMAKE_SOURCE_DIR}/Engine/Graphics/Pipeline.cpp
+        ${CMAKE_SOURCE_DIR}/Engine/Graphics/GraphicsPipeline.cpp
 
         # Input
+
+        # IO
+        ${CMAKE_SOURCE_DIR}/Engine/IO/File.cpp
 
         # Physics
 

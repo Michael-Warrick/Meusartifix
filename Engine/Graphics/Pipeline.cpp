@@ -12,7 +12,6 @@ Graphics::Pipeline::~Pipeline() {
     m_LogicalDevice.destroyRenderPass(m_RenderPass);
 }
 
-
 void Graphics::Pipeline::createRenderPass() {
     vk::AttachmentDescription colorAttachment = vk::AttachmentDescription()
             .setFormat(m_SwapChainImageFormat)
@@ -67,13 +66,13 @@ void Graphics::Pipeline::createRenderPass() {
             .setSrcSubpass(vk::SubpassExternal)
             .setDstSubpass(0)
             .setSrcStageMask(
-                vk::PipelineStageFlagBits::eColorAttachmentOutput |
-                vk::PipelineStageFlagBits::eEarlyFragmentTests)
+                    vk::PipelineStageFlagBits::eColorAttachmentOutput |
+                    vk::PipelineStageFlagBits::eEarlyFragmentTests)
             .setSrcAccessMask(vk::AccessFlagBits::eNone)
             .setDstStageMask(
-                vk::PipelineStageFlagBits::eColorAttachmentOutput | vk::PipelineStageFlagBits::eEarlyFragmentTests)
+                    vk::PipelineStageFlagBits::eColorAttachmentOutput | vk::PipelineStageFlagBits::eEarlyFragmentTests)
             .setDstAccessMask(
-                vk::AccessFlagBits::eColorAttachmentWrite | vk::AccessFlagBits::eDepthStencilAttachmentWrite);
+                    vk::AccessFlagBits::eColorAttachmentWrite | vk::AccessFlagBits::eDepthStencilAttachmentWrite);
 
     std::array<vk::AttachmentDescription, 3> attachments = {colorAttachment, depthAttachment, colorAttachmentResolve};
     vk::RenderPassCreateInfo renderPassCreateInfo = vk::RenderPassCreateInfo()
@@ -92,9 +91,9 @@ void Graphics::Pipeline::createRenderPass() {
 
 vk::Format Graphics::Pipeline::findDepthFormat() const {
     return findSupportedFormat(
-        {vk::Format::eD32Sfloat, vk::Format::eD32SfloatS8Uint, vk::Format::eD24UnormS8Uint},
-        vk::ImageTiling::eOptimal,
-        vk::FormatFeatureFlagBits::eDepthStencilAttachment);
+            {vk::Format::eD32Sfloat, vk::Format::eD32SfloatS8Uint, vk::Format::eD24UnormS8Uint},
+            vk::ImageTiling::eOptimal,
+            vk::FormatFeatureFlagBits::eDepthStencilAttachment);
 }
 
 vk::Format Graphics::Pipeline::findSupportedFormat(const std::vector<vk::Format> &candidates,
@@ -107,7 +106,7 @@ vk::Format Graphics::Pipeline::findSupportedFormat(const std::vector<vk::Format>
         if (tiling == vk::ImageTiling::eLinear && (properties.linearTilingFeatures & features) == features) {
             return format;
         } else if (tiling == vk::ImageTiling::eOptimal && (properties.optimalTilingFeatures & features) ==
-                   features) {
+                                                          features) {
             return format;
         }
     }

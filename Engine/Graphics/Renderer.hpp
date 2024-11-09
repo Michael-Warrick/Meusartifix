@@ -10,10 +10,8 @@
 #include "SwapChain.hpp"
 #include "Pipeline.hpp"
 
-namespace Graphics
-{
-    class Renderer
-    {
+namespace Graphics {
+    class Renderer {
     public:
         explicit Renderer(GLFWwindow *window);
 
