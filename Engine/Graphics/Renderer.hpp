@@ -10,6 +10,7 @@
 #include "SwapChain.hpp"
 #include "Pipeline.hpp"
 #include "GraphicsPipeline.hpp"
+#include "Framebuffer.hpp"
 
 namespace Graphics {
     class Renderer {

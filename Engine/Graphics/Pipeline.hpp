@@ -12,7 +12,7 @@ namespace Graphics {
 
         ~Pipeline();
 
-        [[nodiscard]] vk::RenderPass GetRenderPass() const;
+        [[nodiscard]] vk::RenderPass renderPass() const;
 
     private:
         void createRenderPass();

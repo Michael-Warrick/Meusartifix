@@ -12,7 +12,7 @@ namespace Graphics {
         Surface(const vk::Instance &instance, GLFWwindow *window);
         ~Surface();
 
-        vk::SurfaceKHR GetVulkanSurface();
+        vk::SurfaceKHR get();
     private:
         vk::Instance m_Instance;
         vk::SurfaceKHR m_Surface;

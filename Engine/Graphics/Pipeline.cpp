@@ -13,7 +13,7 @@ Graphics::Pipeline::~Pipeline() {
     m_LogicalDevice.destroyRenderPass(m_RenderPass);
 }
 
-vk::RenderPass Graphics::Pipeline::GetRenderPass() const {
+vk::RenderPass Graphics::Pipeline::renderPass() const {
     return m_RenderPass;
 }
 

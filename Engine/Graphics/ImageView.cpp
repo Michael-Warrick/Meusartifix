@@ -8,22 +8,14 @@ Graphics::ImageView::ImageView(const vk::Device &logicalDevice, const vk::Image 
 }
 
 Graphics::ImageView::~ImageView() {
-    // Only call CleanUp() here if absolutely necessary for unexpected cleanup.
-    if (m_ImageView) {
-        std::cerr << "Warning: ImageView destructor called without explicit cleanup. Consider handling in SwapChain.\n";
-        CleanUp();
-    }
-}
-
-vk::ImageView Graphics::ImageView::GetImageView() const {
-    return m_ImageView;
-}
-
-void Graphics::ImageView::CleanUp() {
     if (m_ImageView) {
         m_LogicalDevice.destroyImageView(m_ImageView);
         m_ImageView = vk::ImageView();
     }
+}
+
+vk::ImageView Graphics::ImageView::get() const {
+    return m_ImageView;
 }
 
 void Graphics::ImageView::createImageView(const vk::Image image, const vk::Format format, const vk::ImageAspectFlags aspectFlags, const uint32_t mipLevels) {

@@ -31,7 +31,7 @@ _deps
 
 # Project specific stuff
 .vscode
-_build
+_build/
 build/
 cmake-build-debug/
 cmake-build-release/

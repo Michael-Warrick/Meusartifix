@@ -19,6 +19,6 @@ Graphics::Surface::~Surface() {
     m_Instance.destroySurfaceKHR(m_Surface);
 }
 
-vk::SurfaceKHR Graphics::Surface::GetVulkanSurface() {
+vk::SurfaceKHR Graphics::Surface::get() {
     return m_Surface;
 }

@@ -13,7 +13,7 @@ Graphics::Instance::~Instance() {
     m_Instance.destroy();
 }
 
-vk::Instance Graphics::Instance::GetVulkanInstance() const {
+vk::Instance Graphics::Instance::get() const {
     return m_Instance;
 }
 

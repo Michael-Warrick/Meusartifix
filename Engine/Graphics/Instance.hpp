@@ -11,7 +11,7 @@ namespace Graphics {
 
         ~Instance();
 
-        [[nodiscard]] vk::Instance GetVulkanInstance() const;
+        [[nodiscard]] vk::Instance get() const;
 
     private:
         void createVulkanInstance();

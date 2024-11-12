@@ -10,15 +10,15 @@ Graphics::Device::~Device() {
     m_LogicalDevice.destroy();
 }
 
-vk::PhysicalDevice Graphics::Device::GetPhysicalVulkanDevice() const {
+vk::PhysicalDevice Graphics::Device::physical() const {
     return m_PhysicalDevice;
 }
 
-vk::Device Graphics::Device::GetLogicalVulkanDevice() const {
+vk::Device Graphics::Device::logical() const {
     return m_LogicalDevice;
 }
 
-vk::SampleCountFlagBits Graphics::Device::GetMSAASamples() const {
+vk::SampleCountFlagBits Graphics::Device::msaaSamples() const {
     return m_MSAASamples;
 }
 

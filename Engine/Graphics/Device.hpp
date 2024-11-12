@@ -14,11 +14,11 @@ namespace Graphics {
 
         ~Device();
 
-        [[nodiscard]] vk::PhysicalDevice GetPhysicalVulkanDevice() const;
+        [[nodiscard]] vk::PhysicalDevice physical() const;
 
-        [[nodiscard]] vk::Device GetLogicalVulkanDevice() const;
+        [[nodiscard]] vk::Device logical() const;
 
-        [[nodiscard]] vk::SampleCountFlagBits GetMSAASamples() const;
+        [[nodiscard]] vk::SampleCountFlagBits msaaSamples() const;
 
     private:
         void pickPhysicalDevice();

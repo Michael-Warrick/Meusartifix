@@ -9,9 +9,7 @@ namespace Graphics {
         ImageView(const vk::Device &logicalDevice, const vk::Image &image, vk::Format format, vk::ImageAspectFlags aspectFlags, uint32_t mipLevels);
         ~ImageView();
 
-        [[nodiscard]] vk::ImageView GetImageView() const ;
-
-        void CleanUp();
+        [[nodiscard]] vk::ImageView get() const ;
 
     private:
         void createImageView(vk::Image image, vk::Format format, vk::ImageAspectFlags aspectFlags, uint32_t mipLevels);
