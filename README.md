@@ -18,8 +18,7 @@ It allows for high customization, with user-editable JSON configuration files, c
 
 ## Project Structure
 - **Assets:** Manages textures, models, shaders and other resources.
-- **Engine:** Contains core game logic, including the crafting system.
-- **Graphics:** Handles Vulkan rendering components, such as renderer, pipeline, swap chain, command pool, and command buffers.
+- **Engine:** Contains core game logic and Graphics directory.
 - **Input:** Processes user input, such as keyboard and mouse interactions.
 - **IO:** Manages file loading, saving, and other input/output operations.
 - **Physics:** Implements physics calculations and collision detection.
